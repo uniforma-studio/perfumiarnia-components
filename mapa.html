@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa</title>
+    <script>
+        if (this.customElements) {
+          try {
+            // feature detect browsers that "forgot" 🙄 to implement built-in extends
+            customElements.define('built-in', document.createElement('p').constructor, {'extends':'p'});
+          } catch(_) {
+            // only WebKit or Safari
+            document.write('<script src="//unpkg.com/@ungap/custom-elements-builtin"><\x2fscript>');
+          }
+        } else {
+          // only legacy browsers
+          document.write('<script src="//unpkg.com/document-register-element"><\x2fscript>');
+        }
+        </script>
+</head>
+<body>
+<div is="inwestycja-mapa"><img slot="material" src="./mapa1.svg"></div>
+<div is="inwestycja-tooltip"></div>
+<script src="./mapa.js"></script>
+</body>
+</html>
