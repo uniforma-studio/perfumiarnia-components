@@ -4,7 +4,10 @@
   "description": "",
   "main": "perfumiarnia-components.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "mapa": "parcel build mapa.js --no-source-maps",
+    "buildings": "parcel build building.js --no-source-maps",
+    "kondygnacja": "parcel build kondygnacja.js --no-source-maps",
+    "slider-container": "parcel build slider-container.js --no-source-maps"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +16,7 @@
     "uce": "^0.12.0",
     "wicked-elements": "^3.1.1"
   },
+
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
