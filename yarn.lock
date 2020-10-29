@@ -768,6 +768,11 @@
   resolved "https://registry.yarnpkg.com/@ungap/create-content/-/create-content-0.2.0.tgz#f123a7c79f391d853600abf6dba44034a8ced58e"
   integrity sha512-CvmX0Mr5PfFARDBbSef0B+SAqSeMKaHOG/twJi9nbPtp/MiNPgyBLqZndiyO3RXQ0RXy6TqwarvB6KWzTmc4MQ==
 
+"@webreflection/lie@^0.1.0":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@webreflection/lie/-/lie-0.1.1.tgz#8221304e07749fbdcf3b808cbb56c7167dd58f61"
+  integrity sha512-dfxgXj0SkzDYGPsxCOCwSrrrouXLRbEu+ivSMQG2INK+VIphpLT9JgANzUNo+X4GfBJm57ZgC5ofSvRmb7ihFg==
+
 ansi-styles@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
@@ -1076,6 +1081,11 @@ punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
+qsa-observer@^1.1.2:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/qsa-observer/-/qsa-observer-1.1.6.tgz#8ce6ff4bdcaea1a5446d204f8b25de53e3d3e151"
+  integrity sha512-KsTYramBtS6gXxH+VMrNA3nI9Jys7yl6H/JPQVN4F3wYShXZ4aZKMNHx8fPcQl5X2QlGjBoENKWYASt6apOB/Q==
+
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/regenerate-unicode-properties/-/regenerate-unicode-properties-8.2.0.tgz#e5de7111d655e7ba60c057dbe9ff37c87e65cdec"
@@ -1262,3 +1272,11 @@ whatwg-url@^8.0.0:
     lodash.sortby "^4.7.0"
     tr46 "^2.0.2"
     webidl-conversions "^5.0.0"
+
+wicked-elements@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/wicked-elements/-/wicked-elements-3.1.1.tgz#35ce3c8ba3c252b5c1f191f4a67f80068b4b23b2"
+  integrity sha512-5K9pAfwKK1l65TvNJU+UoBWw+x1VIc4/R1Hc3nVGXwnPAQ9ib0CTTqoRwPmT9kQa0dgzxVEIy1vYDvNCFJmr7g==
+  dependencies:
+    "@webreflection/lie" "^0.1.0"
+    qsa-observer "^1.1.2"

@@ -148,7 +148,7 @@ define("inwestycja-tooltip", {
       },
     data: {
       1: "Ścieżka od ul. Głogowskiej",
-      2: "Hotel",
+      2: "Focha 34",
       3: "Kamienica przy Śniadeckich",
       4: "Wejście od ul. Śniadeckich",
       5: "Recepcja i SPA",

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c6dd3b44-400a-4528-a632-6a63f2aa732f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/perfumiarnia-components.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slider-container.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kondygnacja-dane_files/fgj4nlb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kondygnacja-dane_files/jquery-3.4.1.min.220afd743d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kondygnacja-dane_files/jquery.typographer.min.pack.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kondygnacja-dane_files/perfumiarnia.webflow.dfa175ad8.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kondygnacja-dane_files/webflow-badge-icon.f67cd735e3.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kondygnacja-dane_files/webflow-badge-text.6faa6a38cd.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kondygnacja-dane_files/webflow.dfa5a2637.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kondygnacja.js" beforeDir="false" afterPath="$PROJECT_DIR$/kondygnacja.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapa.js" beforeDir="false" afterPath="$PROJECT_DIR$/mapa.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1irZcBDMb0fJPnPailKEfHwOJnx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.stylelint" value="true" />
+    <property name="node.js.path.for.package.stylelint" value="project" />
+    <property name="node.js.selected.package.stylelint" value="$USER_HOME$/.config/yarn/global/node_modules/stylelint" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="prettier.files.pattern" value="{**/*,*}.{js,ts,jsx,tsx,css}" />
+    <property name="run.prettier.on.save" value="true" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c6dd3b44-400a-4528-a632-6a63f2aa732f" name="Default Changelist" comment="" />
+      <created>1602667752333</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602667752333</updated>
+      <workItem from="1602667756533" duration="405000" />
+      <workItem from="1602675549160" duration="690000" />
+      <workItem from="1602752169339" duration="110000" />
+      <workItem from="1602752297517" duration="295000" />
+      <workItem from="1603198793043" duration="802000" />
+      <workItem from="1603201759907" duration="106000" />
+      <workItem from="1603889295711" duration="2661000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="kondygnacja.js - modified render, repository refactoring before monorepo" />
+    <option name="LAST_COMMIT_MESSAGE" value="kondygnacja.js - modified render, repository refactoring before monorepo" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="781" y="329" key="SettingsEditor" timestamp="1602752564302">
+      <screen x="0" y="23" width="2560" height="1336" />
+    </state>
+    <state x="781" y="329" key="SettingsEditor/0.23.2560.1336@0.23.2560.1336" timestamp="1602752564302" />
+    <state x="945" y="325" key="run.anything.popup" timestamp="1603892079080">
+      <screen x="0" y="23" width="2560" height="1336" />
+    </state>
+    <state x="945" y="325" key="run.anything.popup/0.23.2560.1336@0.23.2560.1336" timestamp="1603892079080" />
+  </component>
+</project>

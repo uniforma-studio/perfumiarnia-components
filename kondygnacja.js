@@ -129,6 +129,7 @@ define("kondygnacja-mapa", {
     </a>
     `);
     this.html`
+        ${this.slots.direction}
     <style>
     ${`
     :host{
@@ -157,6 +158,7 @@ define("kondygnacja-mapa", {
        }
     `} 
   </style>
+  
   <svg
     height="100%"
     width="100%"
