@@ -1,16 +1,26 @@
 import { define, svg } from "uce";
 
+/**
+ * Defines the kondygnacja-mapa component.
+ */
 define("kondygnacja-mapa", {
   extends: "div",
   attachShadow: { mode: "open" },
   state: {
-      image: [],
-      dataInitialized: false,
-      header: "0 0 1328 1329",
+    image: [],
+    dataInitialized: false,
+    header: "0 0 1328 1329",
+    activeMieszkanie: null, // Active apartment ID
+    mapaPng: '', // State for the PNG map
   },
   external: {
     newState: {}
   },
+  
+  /**
+   * Collects and returns all elements with a slot attribute.
+   * @returns {Object} An object mapping slot names to their corresponding elements.
+   */
   slots() {
     const data = {};
     this.querySelectorAll("[slot]").forEach((el) => {
@@ -20,24 +30,56 @@ define("kondygnacja-mapa", {
     });
     return data;
   },
+
+  /**
+   * Sets the PNG URL directly to the state.
+   * @param {string} pngUrl - The URL of the PNG map.
+   */
+  setMapaPng(pngUrl) {
+    this.state.mapaPng = pngUrl; // Directly set the PNG URL
+    this.render();
+  },
+
+  /**
+   * Fetches the apartment data.
+   */
+  fetchMieszkaniaData() {
+    const slots = this.slots();
+    return this.fetchData(slots.map.src + "?x-request=svg", "g[fill='currentColor']", "image/svg+xml").then((mieszkaniaData) => {
+      this.state.image = mieszkaniaData; // Directly assign fetched data without modifying fill
+      this.render();
+    });
+  },
+
+  /**
+   * Fetches data from a given address and parses it as HTML.
+   * @param {string} adress - The URL to fetch data from.
+   * @param {string} tag - The tag to query in the fetched HTML.
+   * @param {string} header - The content type of the response.
+   * @returns {Promise} A promise that resolves to the parsed data.
+   */
   fetchData(adress, tag, header) {
     let dane = fetch(adress)
-      .then(function (response) {
-        return response.text();
-      })
-      .then(function (html) {
+      .then(response => response.text())
+      .then(html => {
         let parser = new DOMParser();
         let doc = parser.parseFromString(html, header);
         let pageContent = doc.querySelectorAll(tag);
         let boxHeader = doc.querySelector('svg').attributes.viewBox.value;
-        return [pageContent,boxHeader];
+        return [pageContent, boxHeader];
       })
-      .catch(function (err) {
+      .catch(err => {
         console.log("Failed to fetch page: ", err);
       });
     return dane;
   },
-  imageMap(content){
+
+  /**
+   * Maps the content of an SVG element to a structured object.
+   * @param {Element} content - The SVG element to map.
+   * @returns {Object} An object containing the mapped data.
+   */
+  imageMap(content) {
     return {
       id: content.id,
       data: svg([content.outerHTML]),
@@ -45,141 +87,147 @@ define("kondygnacja-mapa", {
       stan: "dostępne"
     };
   },
-  mieszkanieChangeState(id,newStan){
-    let apartment = this.state.image.filter((item) => {
-        return item.id == id;
-    });
+
+  /**
+   * Changes the state of a specific apartment.
+   * @param {string} id - The ID of the apartment to change.
+   * @param {string} newStan - The new state to set for the apartment.
+   */
+  mieszkanieChangeState(id, newStan) {
+    let apartment = this.state.image.filter(item => item.id == id);
     apartment[0].stan = newStan;
     this.render();
+  },
 
-  },
-  set mieszkanieNewState(value){
-    if(!this.state.dataInitialized){
-    this.external.newState[value.id] = value.state;
+  /**
+   * Sets the new state for an apartment based on the provided value.
+   * @param {Object} value - An object containing the apartment ID and new state.
+   */
+  set mieszkanieNewState(value) {
+    if (!this.state.dataInitialized) {
+      this.external.newState[value.id] = value.state;
+    } else {
+      let apartment = this.state.image.filter(item => item.id == value.id);
+      apartment[0].stan = value.state;
+      this.render();
     }
-    else{
-      let apartment = this.state.image.filter((item) => {
-        return item.id == value.id;
-    });
-    apartment[0].stan = value.state;
-    this.render();
-    }
-    
   },
-  activateTooltip(id){
+
+  /**
+   * Activates the tooltip for a specific apartment.
+   * @param {string} id - The ID of the apartment to activate the tooltip for.
+   */
+  activateTooltip(id) {
     let tooltip = document.querySelector('kondygnacja-tooltip');
     tooltip.setMieszkanie(id);
     tooltip.toggl();
   },
-  deactivateTooltip(){
+
+  /**
+   * Deactivates the currently active tooltip.
+   */
+  deactivateTooltip() {
     let tooltip = document.querySelector('kondygnacja-tooltip');
     tooltip.toggl();
   },
-  stateSwitch(state){
-    switch (state){
-        case 'dostępne':
-            return 'mieszkanie';
-        case 'zarezerwowane':
-            return 'mieszkanie zarezerwowane';
-        case 'sprzedane':
-            return 'mieszkanie sprzedane';
-        default:
-            return 'mieszkanie error ' + state;
+
+  /**
+   * Maps the state of an apartment to a human-readable format.
+   * @param {string} state - The state of the apartment.
+   * @returns {string} A string representing the mapped state.
+   */
+  stateSwitch(state) {
+    switch (state) {
+      case 'dostępne':
+        return 'mieszkanie';
+      case 'zarezerwowane':
+        return 'mieszkanie zarezerwowane';
+      case 'sprzedane':
+        return 'mieszkanie sprzedane';
+      default:
+        return 'mieszkanie error ' + state;
     }
   },
- 
-  init(){
-    const slots = this.slots();
-    this.slots = slots;
-    this.fetchData(this.slots.map.src+"?x-request=svg", "g[id='mapa'],g[fill='currentColor']", "image/svg+xml")
-    .then(([imageData,boxHeader]) => {
-      return [Array.prototype.map.call(imageData, this.imageMap),boxHeader];
-    })
-    .then(([imageData,boxHeader]) => {
-      this.state.dataInitialized = true;
-      
-      let idDoZmiany = Object.keys(this.external.newState);
-      let mieszkaniaDoZmiany = this.external.newState;
-      if( idDoZmiany.length > 0){
-        idDoZmiany.forEach(function(id) {
-          let apartment = imageData.filter((item) => {
-            return item.id == id;
-        });
-        apartment[0].stan = mieszkaniaDoZmiany[id];
-        })
+
+  /**
+   * Retrieves the "mapa" data for rendering.
+   * @returns {string} The SVG data for the map.
+   */
+  getMapaData() {
+    return this.state.image.filter(item => item.id === "mapa")[0]?.data || '';
+  },
+
+  /**
+   * Retrieves the rendered apartments based on the active apartment ID.
+   * @returns {Array} An array of rendered apartment elements.
+   */
+  getMieszkaniaRender() {
+    const activeMieszkanie = this.state.activeMieszkanie;
+    const mieszkania = this.state.image.filter(item => item.mieszkanie === true);
+    
+    return mieszkania.map(item => {
+      if (item.id === activeMieszkanie) {
+        return svg.for(item)`
+          <a class="${this.stateSwitch(item.stan)}" onMouseOut=${this.deactivateTooltip} onMouseOver=${() => this.activateTooltip(item.id)} href=${`/mieszkania/${item.id}`}>
+            ${item.data}
+          </a>
+        `;
       }
-      this.state.image = imageData;
-      this.state.header = boxHeader;
-
-      this.render();
+      return '';
     });
-
   },
-  render(){
-    let header = this.state.header;
-    let mapa = this.state.image.filter((item) => {
-        return item.id == "mapa";
-      })[0].data;
-      let mieszkania = this.state.image.filter((item) => {
-        return item.mieszkanie === true;
-    });
-    let mieszkaniaRender = mieszkania.map(item => svg.for(item)`
-    <a class="${this.stateSwitch(item.stan)}" onMouseOut=${this.deactivateTooltip} onMouseOver=${() => this.activateTooltip(item.id)} href=${`/mieszkania/${item.id}`}">
-    ${item.data}
-    </a>
-    `);
+
+  /**
+   * Sets the active apartment ID for the tooltip.
+   * @param {string} id - The ID of the apartment to set as active.
+   */
+  setActiveMieszkanie(id) {
+    this.state.activeMieszkanie = id;
+    this.render();
+  },
+
+  /**
+   * Renders the component's HTML based on the current state.
+   */
+  render() {
+    const mieszkaniaRender = this.getMieszkaniaRender();
+    
     this.html`
-        ${this.slots.direction}
-    <style>
-    ${`
-    :host{
-      width: 100%;
-      height: 100%;
-      padding-right: 64px;
-    }
-    .zarezerwowane{
-           color: rgba(0, 0, 0, 0.5) !important  ;
-       }
-       .mieszkanie{
-        color: #845D39 ;
-       }
-       .sprzedane{
-        color: transparent !important;
-        pointer-events: none !important;
-       }
- 
-       .mieszkanie * {
-        opacity: 0.4 !important;
-
-       }
-       .mieszkanie:hover * {
-        opacity: 0.5 !important;
-
-       }
-    `} 
-  </style>
-  
-  <svg
-    height="100%"
-    width="100%"
-    viewBox=${header}
-    preserveAspectRatio="xMinYMid meet"
-    xmlns="http://www.w3.org/2000/svg"
-    stroke="none"
-    stroke-width="1"
-    fill="none"
-    fill-rule="evenodd"
-  >
-  
-  ${mapa}
-  ${mieszkaniaRender}
-        
-
-        </svg>
-    `
+      <style>
+        :host {
+          width: 100%;
+          height: 100%;
+          padding-right: 64px;
+        }
+        .zarezerwowane {
+          color: rgba(0, 0, 0, 0.5) !important;
+        }
+        .mieszkanie {
+          color: #845D39;
+        }
+        .sprzedane {
+          color: transparent !important;
+          pointer-events: none !important;
+        }
+        .mieszkanie * {
+          opacity: 0.4 !important;
+        }
+        .mieszkanie:hover * {
+          opacity: 0.5 !important;
+        }
+      </style>
+      
+      <svg viewBox="0 0 1328 1329" width="100%" height="auto">
+        <image href="${this.state.mapaPng}" x="0" y="0" width="1328" height="1329" preserveAspectRatio="xMidYMid meet" />
+        ${mieszkaniaRender}
+      </svg>
+    `;
   }
 });
 
+/**
+ * Defines the kondygnacja-tooltip component.
+ */
 define("kondygnacja-tooltip", {
     attachShadow: {mode: "open"},
     observedAttributes: ["data"],
@@ -216,33 +264,41 @@ define("kondygnacja-tooltip", {
           });
         return dane;
       },
-    init(){
-        this.fetchData(this.props.data, ".w-dyn-item", "text/html")
-      .then((data) => {
-        return Array.prototype.map.call(data, this.metaMap);
-      })
-      .then((meta) => {
-       
+    init() {
+      this.fetchDataAndProcess();
+    },
+
+    fetchDataAndProcess() {
+      this.fetchData(this.props.data, ".w-dyn-item", "text/html")
+        .then((data) => this.processFetchedData(data))
+        .then(() => this.render());
+    },
+
+    processFetchedData(data) {
+      return Array.prototype.map.call(data, this.metaMap).then((meta) => {
         this.state.data = meta;
-        let mapa = document.querySelector('[is=kondygnacja-mapa]');
-        if (mapa !== null){
-          this.state.data.forEach((mieszkanie) => {
-            mapa.mieszkanieNewState = {id: mieszkanie.slug,state: mieszkanie.status}
-          })
-        }
-        else {
-        document.addEventListener('readystatechange', () => {
-          let mapa = document.querySelector('[is=kondygnacja-mapa]');
-          if(document.readyState === "complete"){
-          this.state.data.forEach((mieszkanie) => {
-            mapa.mieszkanieNewState = {id: mieszkanie.slug, state: mieszkanie.status};
-          })
-          }
-        });
-        }
-        this.render();
+        this.updateMapaState();
       });
     },
+
+    updateMapaState() {
+      let mapa = document.querySelector('[is=kondygnacja-mapa]');
+      if (mapa !== null) {
+        this.state.data.forEach((mieszkanie) => {
+          mapa.mieszkanieNewState = { id: mieszkanie.slug, state: mieszkanie.status };
+        });
+      } else {
+        document.addEventListener('readystatechange', () => {
+          let mapa = document.querySelector('[is=kondygnacja-mapa]');
+          if (document.readyState === "complete") {
+            this.state.data.forEach((mieszkanie) => {
+              mapa.mieszkanieNewState = { id: mieszkanie.slug, state: mieszkanie.status };
+            });
+          }
+        });
+      }
+    },
+
     toggl(){
       this.state.visible = !this.state.visible;
       this.updateListener();
