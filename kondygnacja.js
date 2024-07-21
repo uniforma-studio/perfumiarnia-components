@@ -73,7 +73,9 @@ define("kondygnacja-mapa", {
   fetchMieszkaniaData() {
     const slots = this.slots();
     return this.fetchData(slots.map.src + "?x-request=svg", "g[fill='currentColor']", "image/svg+xml").then((mieszkaniaData) => {
-      this.state.image = mieszkaniaData; // Directly assign fetched data without modifying fill
+      const [pageContent, boxHeader] = mieszkaniaData;
+      this.state.image = pageContent; // Directly assign fetched data without modifying fill
+      this.state.header = boxHeader; // Store the viewBox in the state
       this.render();
     });
   },
@@ -218,7 +220,7 @@ define("kondygnacja-mapa", {
    */
   render() {
     const mieszkaniaRender = this.getMieszkaniaRender();
-    const viewBox = this.getMapaData().viewBox; // Fetch the viewBox from the SVG data
+    const viewBox = this.state.header; // Use the stored viewBox from the state
     const [minX, minY, width, height] = viewBox.split(' ').map(Number); // Parse the viewBox values
 
     this.html`
