@@ -218,7 +218,9 @@ define("kondygnacja-mapa", {
    */
   render() {
     const mieszkaniaRender = this.getMieszkaniaRender();
-    
+    const viewBox = this.getMapaData().viewBox; // Fetch the viewBox from the SVG data
+    const [minX, minY, width, height] = viewBox.split(' ').map(Number); // Parse the viewBox values
+
     this.html`
       <style>
         :host {
@@ -244,8 +246,8 @@ define("kondygnacja-mapa", {
         }
       </style>
       
-      <svg viewBox="0 0 1328 1329" width="100%" height="auto">
-        <image href="${this.state.mapaPng}" x="0" y="0" width="1328" height="1329" preserveAspectRatio="xMidYMid meet" />
+      <svg viewBox="${viewBox}" width="100%" height="auto">
+        <image href="${this.state.mapaPng}" x="${minX}" y="${minY}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid meet" />
         ${mieszkaniaRender}
       </svg>
     `;
