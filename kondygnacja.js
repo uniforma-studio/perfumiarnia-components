@@ -18,6 +18,33 @@ define("kondygnacja-mapa", {
   },
   
   /**
+   * Initializes the component and fetches the PNG map URL and apartment data.
+   */
+  init() {
+    this.fetchAndSetMapaPng(); // Fetch the PNG URL from the background slot
+    this.fetchMieszkaniaData(); // Fetch the apartment data
+  },
+
+  /**
+   * Fetches the PNG URL from the "background" slot and sets it in the state.
+   */
+  fetchAndSetMapaPng() {
+    const slots = this.slots();
+    const backgroundSlot = slots.background; // Get the background slot element
+
+    if (backgroundSlot) {
+      const pngUrl = backgroundSlot.getAttribute('src'); // Assuming the URL is stored in a 'src' attribute
+      if (pngUrl) {
+        this.setMapaPng(pngUrl); // Call setMapaPng with the fetched URL
+      } else {
+        console.error("No URL found in the background slot.");
+      }
+    } else {
+      console.error("Background slot not found.");
+    }
+  },
+
+  /**
    * Collects and returns all elements with a slot attribute.
    * @returns {Object} An object mapping slot names to their corresponding elements.
    */
