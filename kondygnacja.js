@@ -224,7 +224,7 @@ define("kondygnacja-tooltip", {
       .then((meta) => {
        
         this.state.data = meta;
-        let mapa = document.querySelector('[is=kondygnacja-mapa]');
+        let mapa = document.querySelector('kondygnacja-mapa');
         if (mapa !== null){
           this.state.data.forEach((mieszkanie) => {
             mapa.mieszkanieNewState = {id: mieszkanie.slug,state: mieszkanie.status}
@@ -232,7 +232,7 @@ define("kondygnacja-tooltip", {
         }
         else {
         document.addEventListener('readystatechange', () => {
-          let mapa = document.querySelector('[is=kondygnacja-mapa]');
+          let mapa = document.querySelector('kondygnacja-mapa');
           if(document.readyState === "complete"){
           this.state.data.forEach((mieszkanie) => {
             mapa.mieszkanieNewState = {id: mieszkanie.slug, state: mieszkanie.status};
