@@ -91,8 +91,10 @@ define("kondygnacja-mapa", {
   init(){
     const slots = this.slots();
     this.slots = slots;
+    console.log("map init started");
     this.fetchData(this.slots.map.src+"?x-request=svg", "g[id='mapa'],g[fill='currentColor']", "image/svg+xml")
     .then(([imageData,boxHeader]) => {
+      console.log(imageData);
       return [Array.prototype.map.call(imageData, this.imageMap),boxHeader];
     })
     .then(([imageData,boxHeader]) => {
@@ -116,6 +118,7 @@ define("kondygnacja-mapa", {
 
   },
   render(){
+    console.log("map render");
     let header = this.state.header;
     let mapa = this.state.image.filter((item) => {
         return item.id == "mapa";
